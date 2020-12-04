@@ -1,0 +1,9 @@
+C:\Users\Freeware Sys\source\repos\OnlineShop\MasterShop\MasterShop.Models\bin\Debug\netstandard2.0\MasterShop.Models.deps.json
+C:\Users\Freeware Sys\source\repos\OnlineShop\MasterShop\MasterShop.Models\bin\Debug\netstandard2.0\MasterShop.Models.dll
+C:\Users\Freeware Sys\source\repos\OnlineShop\MasterShop\MasterShop.Models\obj\Debug\netstandard2.0\MasterShop.Models.csprojAssemblyReference.cache
+C:\Users\Freeware Sys\source\repos\OnlineShop\MasterShop\MasterShop.Models\obj\Debug\netstandard2.0\MasterShop.Models.AssemblyInfoInputs.cache
+C:\Users\Freeware Sys\source\repos\OnlineShop\MasterShop\MasterShop.Models\obj\Debug\netstandard2.0\MasterShop.Models.AssemblyInfo.cs
+C:\Users\Freeware Sys\source\repos\OnlineShop\MasterShop\MasterShop.Models\bin\Debug\netstandard2.0\MasterShop.Models.pdb
+C:\Users\Freeware Sys\source\repos\OnlineShop\MasterShop\MasterShop.Models\obj\Debug\netstandard2.0\MasterShop.Models.csproj.CoreCompileInputs.cache
+C:\Users\Freeware Sys\source\repos\OnlineShop\MasterShop\MasterShop.Models\obj\Debug\netstandard2.0\MasterShop.Models.dll
+C:\Users\Freeware Sys\source\repos\OnlineShop\MasterShop\MasterShop.Models\obj\Debug\netstandard2.0\MasterShop.Models.pdb
