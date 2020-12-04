@@ -9,6 +9,7 @@ namespace MasterShop.Models
         public Category()
         {
             this.Id = Guid.NewGuid().ToString();
+            this.CategoryProducts = new HashSet<CategoryProduct>();
         }
         public string Id { get; set; }
 
