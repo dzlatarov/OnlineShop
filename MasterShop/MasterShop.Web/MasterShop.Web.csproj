@@ -20,6 +20,7 @@
   <ItemGroup>
     <ProjectReference Include="..\MasterShop.Data\MasterShop.Data.csproj" />
     <ProjectReference Include="..\MasterShop.Models\MasterShop.Models.csproj" />
+    <ProjectReference Include="..\MasterShop.Services\MasterShop.Services.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,6 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\MasterShop",
+    "\\MasterShop\\MasterShop.Models"
   ],
+  "SelectedNode": "\\MasterShop\\MasterShop.Models\\ApplicationUser.cs",
   "PreviewInSolutionExplorer": false
 }
