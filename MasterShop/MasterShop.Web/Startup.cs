@@ -33,51 +33,19 @@ namespace MasterShop.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.ConfigureApplicationCookie(options =>
-            {
-                options.LoginPath = "/Identity/Account/Login";
-                options.LogoutPath = "/Identity/Account/Logout";
-            });
+            services.ConfigureApplicationCookie()
+                .ConfigureCookiePolicy();
 
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
+            services.AddDbContextPool<MasterShopDbContext>(options => options.UseSqlServer(Configuration.GetDefaultConnection()))
+                .AddIdentity()
+                .AddControllersWithViews();
 
-            services.AddDbContextPool<MasterShopDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
-            {
-                options.Password.RequireDigit = false;
-                options.Password.RequiredLength = 3;
-                options.Password.RequireLowercase = false;
-                options.Password.RequiredUniqueChars = 0;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireUppercase = false;
-                options.SignIn.RequireConfirmedEmail = false;
-                options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -._@+";
-                options.User.RequireUniqueEmail = true;
-            })
-                .AddDefaultUI()
-               .AddRoles<IdentityRole>()
-               .AddRoleManager<RoleManager<IdentityRole>>()
-               .AddDefaultTokenProviders()
-               .AddEntityFrameworkStores<MasterShopDbContext>();
-
-            services.AddControllersWithViews();
             services.AddRazorPages();
 
             services.AddTransient<MasterShopDbContext>();
             services.AddTransient<IProductsService, ProductsService>();
             services.AddTransient<ICategoriesService, CategoriesService>();
-            var config = new AutoMapper.MapperConfiguration(cfg =>
-            {
-                cfg.AddProfile(new AutomapperProfile());
-            });
-            var mapper = config.CreateMapper();
-            services.AddSingleton(mapper);
+            services.AddSingleton(AutomapperConfiguration.CreateMapper());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

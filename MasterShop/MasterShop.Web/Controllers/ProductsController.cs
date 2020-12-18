@@ -59,6 +59,15 @@ namespace MasterShop.Web.Controllers
             return this.View(mappedProduct);
         }
 
+        [HttpPost]
+        public IActionResult Edit(EditProductViewModel model)
+        {
+            var mappedProduct = this.mapper.Map<Product>(model);
+            this.productsService.Update(mappedProduct);
+            this.productsService.Save();
+            return this.Redirect($"/Products/Details/{mappedProduct.Id}");
+        }
+
         [HttpGet]
         public IActionResult Details(string id)
         {

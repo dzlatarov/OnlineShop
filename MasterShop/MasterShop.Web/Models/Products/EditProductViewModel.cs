@@ -14,6 +14,6 @@ namespace MasterShop.Web.Models.Products
 
         public string SKU { get; set; }
 
-        public decimal Price { get; set; }
+        public decimal? Price { get; set; }
     }
 }
