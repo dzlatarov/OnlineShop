@@ -15,6 +15,7 @@ using MasterShop.Data;
 using MasterShop.Models;
 using MasterShop.Services;
 using MasterShop.Services.Contracts;
+using MasterShop.Web.Helper;
 
 namespace MasterShop.Web
 {
@@ -56,6 +57,12 @@ namespace MasterShop.Web
 
             services.AddTransient<IProductsService, ProductsService>();
             services.AddTransient<ICategoriesService, CategoriesService>();
+            var config = new AutoMapper.MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new AutomapperProfile());
+            });
+            var mapper = config.CreateMapper();
+            services.AddSingleton(mapper);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

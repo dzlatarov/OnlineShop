@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="automapper" Version="10.1.1" />
     <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="5.0.0" />
   </ItemGroup>
 
