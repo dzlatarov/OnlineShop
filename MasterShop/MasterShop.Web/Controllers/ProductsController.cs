@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using MasterShop.Models;
 using MasterShop.Services.Contracts;
 using MasterShop.Web.Models.Products;
 using Microsoft.AspNetCore.Authorization;
@@ -21,31 +22,66 @@ namespace MasterShop.Web.Controllers
             this.mapper = mapper;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             var allProducts = this.productsService.GetAllProducts().ToList();
             var mappedProduct = this.mapper.Map<List<ProductIndexViewModel>>(allProducts);
             return this.View(mappedProduct);
-        }
+        }       
 
+        [HttpGet]
         public IActionResult Create()
         {
             return this.View();
         }
 
-        public IActionResult Edit()
+        [HttpPost]
+        public IActionResult Create(CreateProductViewModel model)
         {
-            return this.View();
+            if (!ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+
+            var mappedProductFromModel = this.mapper.Map<Product>(model);
+            this.productsService.Insert(mappedProductFromModel);
+            this.productsService.Save();
+
+            return this.RedirectToAction("Index", "Products");
         }
 
-        public IActionResult Details()
+        [HttpGet]
+        public IActionResult Edit(string id)
         {
-            return this.View();
+            var product = this.productsService.GetProductById(id);
+            var mappedProduct = this.mapper.Map<EditProductViewModel>(product);
+            return this.View(mappedProduct);
         }
 
-        public IActionResult Delete()
+        [HttpGet]
+        public IActionResult Details(string id)
         {
-            return this.View();
+            var product = this.productsService.GetProductById(id);
+            var mappedProduct = this.mapper.Map<DetailsProductViewModel>(product);
+            return this.View(mappedProduct);
+        }
+
+        [HttpGet]
+        public IActionResult Delete(string id)
+        {
+            var product = this.productsService.GetProductById(id);
+            var mappedProduct = this.mapper.Map<DeleteProductViewModel>(product);
+            return this.View(mappedProduct);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(DeleteProductViewModel model)
+        {
+            var mappedProductFromModel = this.mapper.Map<Product>(model);
+            productsService.Delete(mappedProductFromModel);
+            productsService.Save();
+            return this.RedirectToAction("Index", "Products");
         }
     }
 }

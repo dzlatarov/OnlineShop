@@ -13,6 +13,10 @@ namespace MasterShop.Web.Helper
         public AutomapperProfile()
         {
             CreateMap<Product, ProductIndexViewModel>();
+            CreateMap<Product, EditProductViewModel>().ReverseMap();
+            CreateMap<Product, DetailsProductViewModel>();
+            CreateMap<Product, DeleteProductViewModel>().ReverseMap();
+            CreateMap<CreateProductViewModel, Product>();
         }
     }
 }
