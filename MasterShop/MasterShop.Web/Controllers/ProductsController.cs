@@ -17,10 +17,29 @@ namespace MasterShop.Web.Controllers
             this.productsService = productsService;
         }
 
-//{       [Authorize]
-//        public IActionResult Create()
-//        {
+        public IActionResult Index()
+        {
+            return this.View();
+        }
 
-//        }
+        public IActionResult Create()
+        {
+            return this.View();
+        }
+
+        public IActionResult Edit()
+        {
+            return this.View();
+        }
+
+        public IActionResult Details()
+        {
+            return this.View();
+        }
+
+        public IActionResult Delete()
+        {
+            return this.View();
+        }
     }
 }
