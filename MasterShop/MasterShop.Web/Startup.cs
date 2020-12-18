@@ -16,6 +16,7 @@ using MasterShop.Models;
 using MasterShop.Services;
 using MasterShop.Services.Contracts;
 using MasterShop.Web.Helper;
+using MasterShop.Web.Extensions;
 
 namespace MasterShop.Web
 {
@@ -55,6 +56,7 @@ namespace MasterShop.Web
             services.AddControllersWithViews();
             services.AddRazorPages();
 
+            services.AddTransient<MasterShopDbContext>();
             services.AddTransient<IProductsService, ProductsService>();
             services.AddTransient<ICategoriesService, CategoriesService>();
             var config = new AutoMapper.MapperConfiguration(cfg =>
@@ -66,8 +68,11 @@ namespace MasterShop.Web
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, MasterShopDbContext db)
         {
+            var rolesConfig = new RolesExtensionsConfiguration(app, db);
+            rolesConfig.CreateRoles().Wait();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
