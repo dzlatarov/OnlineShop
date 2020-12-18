@@ -24,7 +24,7 @@ namespace MasterShop.Web.Areas.Identity.Pages.Account
         public async Task<IActionResult> OnGet()
         {
             await _signInManager.SignOutAsync();
-            return LocalRedirect("~/");
+            return this.LocalRedirect("~/");
         }
     }
 }

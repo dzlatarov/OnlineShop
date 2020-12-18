@@ -17,6 +17,7 @@ using MasterShop.Services;
 using MasterShop.Services.Contracts;
 using MasterShop.Web.Helper;
 using MasterShop.Web.Extensions;
+using Microsoft.AspNetCore.Http;
 
 namespace MasterShop.Web
 {
@@ -32,6 +33,18 @@ namespace MasterShop.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Identity/Account/Login";
+                options.LogoutPath = "/Identity/Account/Logout";
+            });
+
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+
             services.AddDbContextPool<MasterShopDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
@@ -86,7 +99,7 @@ namespace MasterShop.Web
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseCookiePolicy();
             app.UseRouting();
 
             app.UseAuthentication();
