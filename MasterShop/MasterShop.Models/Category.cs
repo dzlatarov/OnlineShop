@@ -13,6 +13,8 @@ namespace MasterShop.Models
         }
         public string Id { get; set; }
 
+        public string Name { get; set; }
+
         public ICollection<CategoryProduct> CategoryProducts { get; set; }
     }
 }

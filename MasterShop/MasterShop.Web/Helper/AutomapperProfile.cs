@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MasterShop.Models;
+using MasterShop.Web.Models.Categories;
 using MasterShop.Web.Models.Products;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,12 @@ namespace MasterShop.Web.Helper
             CreateMap<Product, DetailsProductViewModel>();
             CreateMap<Product, DeleteProductViewModel>().ReverseMap();
             CreateMap<CreateProductViewModel, Product>();
+            CreateMap<Category, CategoryIndexViewModel>();
+            CreateMap<Category, CreateCategoryViewModel>();
+            CreateMap<Category, DetailsCategoryViewModel>();
+            CreateMap<Category, DeleteCategoryViewModel>().ReverseMap();
+            CreateMap<Category, EditCategoryViewModel>().ReverseMap();
+            CreateMap<CreateCategoryViewModel, Category>();
         }
     }
 }
