@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace MasterShop.Web.Controllers
 {
-    public class CategoryController : Controller
+    public class CategoriesController : Controller
     {
         private readonly ICategoriesService categoriesService;
         private readonly IMapper mapper;
 
-        public CategoryController(ICategoriesService categoriesService, IMapper mapper)
+        public CategoriesController(ICategoriesService categoriesService, IMapper mapper)
         {
             this.categoriesService = categoriesService;
             this.mapper = mapper;
@@ -32,7 +32,7 @@ namespace MasterShop.Web.Controllers
 
         [HttpGet]
         public IActionResult Create()
-        {            
+        {
             return this.View();
         }
 
@@ -43,7 +43,7 @@ namespace MasterShop.Web.Controllers
             this.categoriesService.Insert(categoryFromModel);
             this.categoriesService.Save();
 
-            return this.RedirectToAction("Index", "Category");
+            return this.RedirectToAction("Index", "Categories");
         }
 
         [HttpGet]
@@ -52,8 +52,17 @@ namespace MasterShop.Web.Controllers
             var category = this.categoriesService.GetCategoryById(id);
             var mappedCategory = this.mapper.Map<EditCategoryViewModel>(category);
             return this.View(mappedCategory);
-        }   
-        
+        }
+
+        [HttpPost]
+        public IActionResult Edit(EditCategoryViewModel model)
+        {
+            var categoryFromModel = this.mapper.Map<Category>(model);
+            this.categoriesService.Update(categoryFromModel);
+            this.categoriesService.Save();
+            return this.RedirectToAction("Index", "Categories");
+        }
+
         [HttpGet]
         public IActionResult Details(string id)
         {

@@ -7,6 +7,7 @@ namespace MasterShop.Web.Models.Categories
 {
     public class EditCategoryViewModel
     {
+        public string Id { get; set; }
         public string Name { get; set; }
     }
 }

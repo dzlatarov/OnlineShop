@@ -11,7 +11,7 @@ namespace MasterShop.Models
         public Product()
         {
             this.Id = Guid.NewGuid().ToString();
-            this.Images = new HashSet<Image>();
+            this.GalleryImages = new HashSet<Image>();
             this.CategoryProducts = new HashSet<CategoryProduct>();
         }
 
@@ -35,7 +35,9 @@ namespace MasterShop.Models
 
         public virtual Order Order { get; set; }
 
-        public ICollection<Image> Images { get; set; }
+        public string ProductImage { get; set; }
+
+        public ICollection<Image> GalleryImages { get; set; }
 
         public ICollection<CategoryProduct> CategoryProducts { get; set; }
     }

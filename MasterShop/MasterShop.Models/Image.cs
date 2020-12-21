@@ -12,6 +12,8 @@ namespace MasterShop.Models
         }
         public string Id { get; set; }
 
+        public string ImageFile { get; set; }
+
         public string ProductId { get; set; }
 
         public virtual Product Product { get; set; }

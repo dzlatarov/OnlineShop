@@ -13,17 +13,16 @@ namespace MasterShop.Web.Helper
     {
         public AutomapperProfile()
         {
+            CreateMap<Category, CategoryIndexViewModel>();
+            CreateMap<Category, DetailsCategoryViewModel>();
+            CreateMap<Category, DeleteCategoryViewModel>().ReverseMap();
+            CreateMap<Category, EditCategoryViewModel>().ReverseMap();
+            CreateMap<CreateCategoryViewModel, Category>();
             CreateMap<Product, ProductIndexViewModel>();
             CreateMap<Product, EditProductViewModel>().ReverseMap();
             CreateMap<Product, DetailsProductViewModel>();
             CreateMap<Product, DeleteProductViewModel>().ReverseMap();
             CreateMap<CreateProductViewModel, Product>();
-            CreateMap<Category, CategoryIndexViewModel>();
-            CreateMap<Category, CreateCategoryViewModel>();
-            CreateMap<Category, DetailsCategoryViewModel>();
-            CreateMap<Category, DeleteCategoryViewModel>().ReverseMap();
-            CreateMap<Category, EditCategoryViewModel>().ReverseMap();
-            CreateMap<CreateCategoryViewModel, Category>();
         }
     }
 }
