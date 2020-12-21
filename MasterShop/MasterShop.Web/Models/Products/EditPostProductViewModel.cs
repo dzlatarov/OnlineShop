@@ -1,12 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace MasterShop.Web.Models.Products
 {
-    public class EditProductViewModel
+    public class EditPostProductViewModel
     {
         public string Id { get; set; }
         public string Name { get; set; }
@@ -17,6 +16,6 @@ namespace MasterShop.Web.Models.Products
 
         public decimal? Price { get; set; }
 
-        public IFormFile ProductImage { get; set; }
+        public string ProductImage { get; set; }
     }
 }

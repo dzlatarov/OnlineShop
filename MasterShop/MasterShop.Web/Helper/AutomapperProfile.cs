@@ -23,7 +23,7 @@ namespace MasterShop.Web.Helper
                 .ForMember(dest => dest.CategoryNames, opt => opt.MapFrom(crc => crc.CategoryProducts.Select(n => n.Category)));
             CreateMap<CreatePostProductViewModel, Product>();
             CreateMap<Product, DeleteProductViewModel>().ReverseMap();
-            CreateMap<Product, EditProductViewModel>().ReverseMap();
+            CreateMap<EditPostProductViewModel, Product>().ReverseMap();
         }
     }
 }
