@@ -24,8 +24,17 @@ namespace MasterShop.Services
             return db.Products;
         }
 
-        public void Insert(Product product)
+        public void Insert(Product product, List<string> categories)
         {
+            foreach (var item in categories)
+            {
+                product.CategoryProducts.Add(new CategoryProduct()
+                { 
+                    Product = product,
+                    CategoryId = item
+                });
+            }
+
             db.Products.Add(product);
         }
 

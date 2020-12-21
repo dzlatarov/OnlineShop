@@ -11,7 +11,7 @@ namespace MasterShop.Services.Contracts
     {
         IQueryable<Product> GetAllProducts();
         Product GetProductById(string id);
-        void Insert(Product product);
+        void Insert(Product product, List<string> categories);
         void Update(Product product);
         void Delete(Product product);
         void Save();

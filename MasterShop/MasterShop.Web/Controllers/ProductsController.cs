@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
 using MasterShop.Models;
 using MasterShop.Services.Contracts;
+using MasterShop.Web.Helper;
 using MasterShop.Web.Models.Products;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,11 +18,15 @@ namespace MasterShop.Web.Controllers
     {
         private readonly IProductsService productsService;
         private readonly IMapper mapper;
+        private readonly ICategoriesService categoriesService;
+        private readonly IWebHostEnvironment env;
 
-        public ProductsController(IProductsService productsService, IMapper mapper)
+        public ProductsController(IProductsService productsService, IMapper mapper, ICategoriesService categoriesService, IWebHostEnvironment env)
         {
             this.productsService = productsService;
             this.mapper = mapper;
+            this.categoriesService = categoriesService;
+            this.env = env;
         }
 
         [HttpGet]
@@ -28,24 +35,36 @@ namespace MasterShop.Web.Controllers
             var allProducts = this.productsService.GetAllProducts().ToList();
             var mappedProduct = this.mapper.Map<List<ProductIndexViewModel>>(allProducts);
             return this.View(mappedProduct);
-        }       
+        }
 
         [HttpGet]
         public IActionResult Create()
         {
-            return this.View();
+            CreateProductViewModel model = new CreateProductViewModel();
+            model.Categories = this.categoriesService.GetAllCategory().Select(x => new SelectListItem()
+            {
+                Text = x.Name,
+                Value = x.Id
+            }).ToList();
+            return this.View(model);
         }
 
         [HttpPost]
         public IActionResult Create(CreateProductViewModel model)
         {
-            if (!ModelState.IsValid)
+            var fileUpload = new FileUpload(env);
+            var selectedCategories = model.Categories.Where(x => x.Selected).Select(x => x.Value).ToList();
+            var imageFile = fileUpload.UploadFile(model.ProductImage);
+            var product = new CreatePostProductViewModel
             {
-                return this.View(model);
-            }
-
-            var mappedProductFromModel = this.mapper.Map<Product>(model);
-            this.productsService.Insert(mappedProductFromModel);
+                Name = model.Name,
+                Description = model.Description,
+                SKU = model.SKU,
+                Price = model.Price,
+                ProductImage = imageFile
+            };
+            var mappedProductFromModel = this.mapper.Map<Product>(product);
+            this.productsService.Insert(mappedProductFromModel, selectedCategories);
             this.productsService.Save();
 
             return this.RedirectToAction("Index", "Products");
