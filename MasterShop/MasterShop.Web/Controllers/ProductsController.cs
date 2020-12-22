@@ -71,6 +71,7 @@ namespace MasterShop.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult Edit(string id)
         {
             var product = this.productsService.GetProductById(id);
