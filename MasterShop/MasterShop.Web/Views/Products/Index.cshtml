@@ -53,7 +53,7 @@
                     else
                     {
                         @Html.ActionLink("Details", "Details", new { id = item.Id });
-                        <p class="btn btn-danger shoppingCart" @*asp-controller="ShoppingCart" asp-action="Index"*@>Add to shopping cart</p>
+                        <a onclick="save(event)" class="btn btn-danger" asp-controller="ShoppingCart" asp-action="Index">Add to shopping cart</a>
                     }
                 </td>
             </tr>
