@@ -5,8 +5,22 @@
     ViewData["Title"] = "Index";
 }
 
-<h1 class="text-center">Shopping Cart</h1>
 
-<div>
-
+<div class="container">
+    <h1 class="text-center">Shopping Cart</h1>
+    <div class="justify-content-end mb-4">
+        <button onclick="showProducts()" class="btn btn-danger">Show products in cart</button>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Description</th>
+                <th>SKU</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody id="body">            
+        </tbody>
+    </table>
 </div>
