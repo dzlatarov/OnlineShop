@@ -18,6 +18,7 @@ using MasterShop.Services.Contracts;
 using MasterShop.Web.Helper;
 using MasterShop.Web.Extensions;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MasterShop.Web
 {
@@ -35,6 +36,13 @@ namespace MasterShop.Web
         {
             services.ConfigureApplicationCookie()
                 .ConfigureCookiePolicy();
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromDays(1);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
 
             services.AddDbContextPool<MasterShopDbContext>(options => options.UseSqlServer(Configuration.GetDefaultConnection()))
                 .AddIdentity()
@@ -45,6 +53,7 @@ namespace MasterShop.Web
             services.AddTransient<MasterShopDbContext>();
             services.AddTransient<IProductsService, ProductsService>();
             services.AddTransient<ICategoriesService, CategoriesService>();
+            services.AddTransient<IShoppingCartService, ShoppingCartService>();
             services.AddSingleton(AutomapperConfiguration.CreateMapper());
         }
 
@@ -69,7 +78,7 @@ namespace MasterShop.Web
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseRouting();
-
+            app.UseSession();
             app.UseAuthentication();
             app.UseAuthorization();
 

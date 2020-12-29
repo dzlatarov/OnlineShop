@@ -2,6 +2,7 @@
 using MasterShop.Models;
 using MasterShop.Web.Models.Categories;
 using MasterShop.Web.Models.Products;
+using MasterShop.Web.Models.ShoppingCart;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,7 @@ namespace MasterShop.Web.Helper
             CreateMap<CreatePostProductViewModel, Product>();
             CreateMap<Product, DeleteProductViewModel>().ReverseMap();
             CreateMap<EditPostProductViewModel, Product>().ReverseMap();
+            CreateMap<Product, ShoppingCartProductViewModel>().ReverseMap();
         }
     }
 }
