@@ -1,77 +1,78 @@
-﻿@model IEnumerable<MasterShop.Web.Models.ShoppingCart.ShoppingCartProductViewModel>
-
+﻿
 @{
     ViewData["Title"] = "Index";
 }
 
 <h1>Index</h1>
 
-@if (Model.Count() > 0)
+
+@if (ViewBag.cart != null)
 {
     <table class="table">
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Id)
+                    Name
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Name)
+                    Description
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Description)
+                    SKU
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.SKU)
+                    Quantity
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Quantity)
+                    Stock
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Stock)
+                    Price
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Price)
-                </th>
-                <th>
-                    Total
+                    Sub Total
                 </th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model)
+            @foreach (var item in ViewBag.cart)
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Id)
+                        @item.Name
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Name)
+                        @item.Description
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Description)
+                        @item.SKU
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.SKU)
+                        @item.Quantity
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Quantity)
+                        @item.Stock
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Stock)
+                        @item.Price
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Price)
+                        @(item.Quantity * item.Price)
                     </td>
                     <td>
-                        @ViewBag.total
-                    </td>
-                    <td>
-                        @Html.ActionLink("Remove", "Remove", new { id = item.Id }) |
+                        <a asp-controller="ShoppingCart" asp-action="Remove" asp-route-id="@item.Id">Remove</a>
                     </td>
                 </tr>
             }
+            <tr>
+                <td align="right" colspan="6">
+                    Sum
+                </td>
+                <td>
+                    @ViewBag.total
+                </td>
+            </tr>
         </tbody>
     </table>
 }
-

@@ -53,7 +53,6 @@ namespace MasterShop.Web
             services.AddTransient<MasterShopDbContext>();
             services.AddTransient<IProductsService, ProductsService>();
             services.AddTransient<ICategoriesService, CategoriesService>();
-            services.AddTransient<IShoppingCartService, ShoppingCartService>();
             services.AddSingleton(AutomapperConfiguration.CreateMapper());
         }
 

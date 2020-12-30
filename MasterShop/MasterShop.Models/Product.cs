@@ -25,7 +25,7 @@ namespace MasterShop.Models
         [Required]
         public string SKU { get; set; }
 
-        public int Quantity { get; set; }
+        public int Quantity { get; set; } = 1;
 
         [Required]
         public StockType Stock { get; set; }

@@ -26,8 +26,12 @@ namespace MasterShop.Web.Controllers
         {
             var cartModel = SessionHelper.GetObjectFromJson<List<ShoppingCartProductViewModel>>(HttpContext.Session, "cart");
             var cart = this.mapper.Map<List<Product>>(cartModel);
-            ViewBag.total = cart.Sum(p => p.Quantity * p.Price);
-            return this.View(cartModel);
+            if (cart.Count() > 0)
+            {
+                ViewBag.cart = cart;
+                ViewBag.total = cart.Sum(p => p.Quantity * p.Price);
+            }
+            return this.View();
         }
 
         private int GetProductIndex(string id)
@@ -44,6 +48,7 @@ namespace MasterShop.Web.Controllers
             return -1;
         }
 
+        [HttpGet]
         public IActionResult Buy(string id)
         {
             var cart = new List<ShoppingCartProductViewModel>();
@@ -73,6 +78,7 @@ namespace MasterShop.Web.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
         public IActionResult Remove(string id)
         {
             var cart = SessionHelper.GetObjectFromJson<List<ShoppingCartProductViewModel>>(HttpContext.Session, "cart");
