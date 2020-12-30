@@ -19,7 +19,7 @@ namespace MasterShop.Services
         }
 
         public void CreateOrder(Order order)
-        {
+        {           
             this.db.Orders.Add(order);
         }
 

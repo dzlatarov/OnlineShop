@@ -16,9 +16,7 @@ namespace MasterShop.Web.Models.ShoppingCart
 
         public string SKU { get; set; }
 
-        public int Quantity { get; set; } = 1;
-
-        public StockType Stock { get; set; }
+        public int Quantity { get; set; }
 
         public decimal Price { get; set; }
     }

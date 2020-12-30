@@ -2,8 +2,9 @@
 @{
     ViewData["Title"] = "Index";
 }
-
-<h1>Index</h1>
+<div class="mb-4">
+    <h1>Shopping Cart</h1>
+</div>
 
 
 @if (ViewBag.cart != null)
@@ -22,9 +23,6 @@
                 </th>
                 <th>
                     Quantity
-                </th>
-                <th>
-                    Stock
                 </th>
                 <th>
                     Price
@@ -52,9 +50,6 @@
                         @item.Quantity
                     </td>
                     <td>
-                        @item.Stock
-                    </td>
-                    <td>
                         @item.Price
                     </td>
                     <td>
@@ -66,11 +61,14 @@
                 </tr>
             }
             <tr>
-                <td align="right" colspan="6">
-                    Sum
+                <td align="right" colspan="5">
+                    Total
                 </td>
                 <td>
                     @ViewBag.total
+                </td>
+                <td>
+                    <a asp-controller="Orders" asp-action="Create">Create Order</a>
                 </td>
             </tr>
         </tbody>

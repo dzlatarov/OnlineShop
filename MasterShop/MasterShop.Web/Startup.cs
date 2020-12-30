@@ -37,12 +37,7 @@ namespace MasterShop.Web
             services.ConfigureApplicationCookie()
                 .ConfigureCookiePolicy();
             services.AddDistributedMemoryCache();
-            services.AddSession(options =>
-            {
-                options.IdleTimeout = TimeSpan.FromDays(1);
-                options.Cookie.HttpOnly = true;
-                options.Cookie.IsEssential = true;
-            });
+            services.AddSessionConfig();
 
             services.AddDbContextPool<MasterShopDbContext>(options => options.UseSqlServer(Configuration.GetDefaultConnection()))
                 .AddIdentity()
@@ -53,6 +48,7 @@ namespace MasterShop.Web
             services.AddTransient<MasterShopDbContext>();
             services.AddTransient<IProductsService, ProductsService>();
             services.AddTransient<ICategoriesService, CategoriesService>();
+            services.AddTransient<IOrdersService, OrdersService>();
             services.AddSingleton(AutomapperConfiguration.CreateMapper());
         }
 
