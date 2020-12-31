@@ -30,6 +30,24 @@ namespace MasterShop.Web.Controllers
         {
             var cart = this.mapper.Map<List<Product>>(SessionHelper.GetObjectFromJson<List<ShoppingCartProductViewModel>>(HttpContext.Session, "cart"));
             var userId = GetUserId();
+
+            //When the user is not logged in he will need to add additional information for the order.
+            if (!this.User.Identity.IsAuthenticated)
+            {
+                //Todo...
+            }
+            //When the user is logged in he wont need to write additional information like name address.
+            this.CreateOrderLoggedUser(cart, userId);
+            return this.RedirectToAction("Index", "ShoppingCart");
+        }
+
+        private string GetUserId()
+        {
+            return this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+        }
+
+        private void CreateOrderLoggedUser(List<Product> products, string userId)
+        {
             var order = new Order
             {
                 DateOfCreation = DateTime.Now,
@@ -38,20 +56,16 @@ namespace MasterShop.Web.Controllers
 
             this.ordersService.CreateOrder(order);
             this.ordersService.Save();
-            foreach (var product in cart)
+
+            foreach (var product in products)
             {
                 product.OrderId = order.Id;
                 this.productsService.Update(product);
                 this.productsService.Save();
             }
-            cart.Clear();
-            SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
-            return this.RedirectToAction("Index", "ShoppingCart");
-        }
-
-        private string GetUserId()
-        {
-            return this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            order.Products = products;
+            products.Clear();
+            SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", products);
         }
     }
 }
