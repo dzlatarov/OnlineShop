@@ -13,6 +13,7 @@ namespace MasterShop.Models
             this.Id = Guid.NewGuid().ToString();
             this.GalleryImages = new HashSet<Image>();
             this.CategoryProducts = new HashSet<CategoryProduct>();
+            this.OrderProducts = new HashSet<OrderProduct>();
         }
 
         public string Id { get; set; }
@@ -33,14 +34,16 @@ namespace MasterShop.Models
         [Required]
         public decimal Price { get; set; }
 
-        public string OrderId { get; set; }
+        //public string OrderId { get; set; }
 
-        public virtual Order Order { get; set; }
+        //public Order Order { get; set; }
 
         public string ProductImage { get; set; }
 
         public ICollection<Image> GalleryImages { get; set; }
 
         public ICollection<CategoryProduct> CategoryProducts { get; set; }
+
+        public ICollection<OrderProduct> OrderProducts { get; set; }
     }
 }

@@ -10,7 +10,7 @@ namespace MasterShop.Services.Contracts
     {
         IQueryable<Order> GetAllOrders();
         Order GetOrderById(string id);
-        void CreateOrder(Order order);
+        void CreateOrder(Order order, List<Product> products);
         void Update(Order order);
         void Delete(Order order);
         void Save();

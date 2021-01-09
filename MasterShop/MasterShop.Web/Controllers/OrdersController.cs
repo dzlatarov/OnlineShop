@@ -54,16 +54,16 @@ namespace MasterShop.Web.Controllers
                 UserId = userId
             };
 
-            this.ordersService.CreateOrder(order);
+            this.ordersService.CreateOrder(order, products);
             this.ordersService.Save();
 
-            foreach (var product in products)
-            {
-                product.OrderId = order.Id;
-                this.productsService.Update(product);
-                this.productsService.Save();
-            }
-            order.Products = products;
+            //foreach (var product in products)
+            //{
+            //    product.OrderId = order.Id;
+            //    this.productsService.Update(product);
+            //    this.productsService.Save();
+            //}
+            //order.Products = products;
             products.Clear();
             SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", products);
         }

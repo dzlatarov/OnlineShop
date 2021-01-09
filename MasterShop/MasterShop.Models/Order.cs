@@ -9,7 +9,8 @@ namespace MasterShop.Models
         public Order()
         {
             this.Id = Guid.NewGuid().ToString();
-            this.Products = new HashSet<Product>();
+            //this.Products = new HashSet<Product>();
+            this.OrderProducts = new HashSet<OrderProduct>();
         }
         public string Id { get; set; }
 
@@ -21,6 +22,8 @@ namespace MasterShop.Models
 
         public virtual ApplicationUser User { get; set; }
 
-        public ICollection<Product> Products { get; set; }
+        //public ICollection<Product> Products { get; set; }
+
+        public ICollection<OrderProduct> OrderProducts { get; set; }
     }
 }

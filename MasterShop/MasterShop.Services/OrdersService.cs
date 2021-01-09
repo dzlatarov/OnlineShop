@@ -18,8 +18,16 @@ namespace MasterShop.Services
             this.db = db;
         }
 
-        public void CreateOrder(Order order)
-        {           
+        public void CreateOrder(Order order, List<Product> products)
+        {
+            foreach (var item in products)
+            {
+                order.OrderProducts.Add(new OrderProduct()
+                {
+                    Order = order,
+                    ProductId = item.Id
+                });
+            }            
             this.db.Orders.Add(order);
         }
 
