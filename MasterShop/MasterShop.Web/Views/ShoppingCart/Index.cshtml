@@ -6,71 +6,143 @@
     <h1>Shopping Cart</h1>
 </div>
 
-
-@if (ViewBag.cart != null)
+@if (this.User.Identity.IsAuthenticated)
 {
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    Name
-                </th>
-                <th>
-                    Description
-                </th>
-                <th>
-                    SKU
-                </th>
-                <th>
-                    Quantity
-                </th>
-                <th>
-                    Price
-                </th>
-                <th>
-                    Sub Total
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in ViewBag.cart)
-            {
+    @if (ViewBag.cart != null)
+    {
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>
-                        @item.Name
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Description
+                    </th>
+                    <th>
+                        SKU
+                    </th>
+                    <th>
+                        Quantity
+                    </th>
+                    <th>
+                        Price
+                    </th>
+                    <th>
+                        Sub Total
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in ViewBag.cart)
+                {
+                    <tr>
+                        <td>
+                            @item.Name
+                        </td>
+                        <td>
+                            @item.Description
+                        </td>
+                        <td>
+                            @item.SKU
+                        </td>
+                        <td>
+                            @item.Quantity
+                        </td>
+                        <td>
+                            @item.Price
+                        </td>
+                        <td>
+                            @(item.Quantity * item.Price)
+                        </td>
+                        <td>
+                            <a asp-controller="ShoppingCart" asp-action="Remove" asp-route-id="@item.Id">Remove</a>
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <td align="right" colspan="5">
+                        Total
                     </td>
                     <td>
-                        @item.Description
+                        @ViewBag.total
                     </td>
                     <td>
-                        @item.SKU
-                    </td>
-                    <td>
-                        @item.Quantity
-                    </td>
-                    <td>
-                        @item.Price
-                    </td>
-                    <td>
-                        @(item.Quantity * item.Price)
-                    </td>
-                    <td>
-                        <a asp-controller="ShoppingCart" asp-action="Remove" asp-route-id="@item.Id">Remove</a>
+                        <a asp-controller="Orders" asp-action="Create">Create Order</a>
                     </td>
                 </tr>
-            }
-            <tr>
-                <td align="right" colspan="5">
-                    Total
-                </td>
-                <td>
-                    @ViewBag.total
-                </td>
-                <td>
-                    <a asp-controller="Orders" asp-action="Create">Create Order</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    }
+}
+else
+{
+    @if (ViewBag.cart != null)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Description
+                    </th>
+                    <th>
+                        SKU
+                    </th>
+                    <th>
+                        Quantity
+                    </th>
+                    <th>
+                        Price
+                    </th>
+                    <th>
+                        Sub Total
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in ViewBag.cart)
+                {
+                    <tr>
+                        <td>
+                            @item.Name
+                        </td>
+                        <td>
+                            @item.Description
+                        </td>
+                        <td>
+                            @item.SKU
+                        </td>
+                        <td>
+                            @item.Quantity
+                        </td>
+                        <td>
+                            @item.Price
+                        </td>
+                        <td>
+                            @(item.Quantity * item.Price)
+                        </td>
+                        <td>
+                            <a asp-controller="ShoppingCart" asp-action="Remove" asp-route-id="@item.Id">Remove</a>
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <td align="right" colspan="5">
+                        Total
+                    </td>
+                    <td>
+                        @ViewBag.total
+                    </td>
+                    <td>
+                        <a asp-controller="Orders" asp-action="Create">Create Order</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    }
 }
