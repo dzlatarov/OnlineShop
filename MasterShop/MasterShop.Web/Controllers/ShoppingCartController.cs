@@ -2,6 +2,7 @@
 using MasterShop.Models;
 using MasterShop.Services.Contracts;
 using MasterShop.Web.Helper;
+using MasterShop.Web.Models.Orders;
 using MasterShop.Web.Models.ShoppingCart;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -22,7 +23,7 @@ namespace MasterShop.Web.Controllers
             this.productsService = productsService;
         }
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Index(CreateUnloggedUserOrderViewModel model)
         {
             var cartModel = SessionHelper.GetObjectFromJson<List<ShoppingCartProductViewModel>>(HttpContext.Session, "cart");
             var cart = this.mapper.Map<List<Product>>(cartModel);
@@ -31,7 +32,7 @@ namespace MasterShop.Web.Controllers
                 ViewBag.cart = cart;
                 ViewBag.total = cart.Sum(p => p.Quantity * p.Price);
             }
-            return this.View();
+            return this.View(model);
         }
 
         private int GetProductIndex(string id)

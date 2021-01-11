@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using MasterShop.Data;
 using MasterShop.Models;
 using MasterShop.Services.Contracts;
 using MasterShop.Web.Helper;
+using MasterShop.Web.Models.Orders;
 using MasterShop.Web.Models.ShoppingCart;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -17,27 +19,44 @@ namespace MasterShop.Web.Controllers
         private readonly IOrdersService ordersService;
         private readonly IProductsService productsService;
         private readonly IMapper mapper;
+        private readonly MasterShopDbContext db;
 
-        public OrdersController(IOrdersService ordersService, IProductsService productsService, IMapper mapper)
+        public OrdersController(IOrdersService ordersService, IProductsService productsService, IMapper mapper, MasterShopDbContext db)
         {
             this.ordersService = ordersService;
             this.productsService = productsService;
             this.mapper = mapper;
+            this.db = db;
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public IActionResult Create(CreateUnloggedUserOrderViewModel model)
         {
             var cart = this.mapper.Map<List<Product>>(SessionHelper.GetObjectFromJson<List<ShoppingCartProductViewModel>>(HttpContext.Session, "cart"));
             var userId = GetUserId();
 
-            //When the user is not logged in he will need to add additional information for the order.
-            if (!this.User.Identity.IsAuthenticated)
+            if (userId == null)
             {
-                //Todo...
+                //When the user is not logged in he will need to add additional information for the order.
+                var user = new ApplicationUser()
+                {
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    Email = model.Email,
+                    Address = model.Address,
+                    PhoneNumber = model.PhoneNumber
+                };
+                this.db.Users.Add(user);
+                this.db.SaveChanges();
+
+                this.CreateOrder(cart, user.Id);
             }
-            //When the user is logged in he wont need to write additional information like name address.
-            this.CreateOrderLoggedUser(cart, userId);
+            else
+            {
+                //When the user is logged in he wont need to write additional information like name address.  
+                this.CreateOrder(cart, userId);
+            }
+
             return this.RedirectToAction("Index", "ShoppingCart");
         }
 
@@ -46,7 +65,7 @@ namespace MasterShop.Web.Controllers
             return this.User.FindFirstValue(ClaimTypes.NameIdentifier);
         }
 
-        private void CreateOrderLoggedUser(List<Product> products, string userId)
+        private void CreateOrder(List<Product> products, string userId)
         {
             var order = new Order
             {
