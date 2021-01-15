@@ -37,7 +37,7 @@ namespace MasterShop.Web.Controllers
 
             if (userId == null)
             {
-                //When the user is not logged in he will need to add additional information for the order.
+                //When the user is not logged in he will need to add additional information for the order.                
                 var user = new ApplicationUser()
                 {
                     FirstName = model.FirstName,
