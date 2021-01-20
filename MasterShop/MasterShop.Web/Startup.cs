@@ -49,6 +49,7 @@ namespace MasterShop.Web
             services.AddTransient<IProductsService, ProductsService>();
             services.AddTransient<ICategoriesService, CategoriesService>();
             services.AddTransient<IOrdersService, OrdersService>();
+            services.AddTransient<IUsersService, UsersService>();
             services.AddSingleton(AutomapperConfiguration.CreateMapper());
         }
 
