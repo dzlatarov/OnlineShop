@@ -103,7 +103,6 @@ else
                     <th>
                         Sub Total
                     </th>
-                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -141,47 +140,53 @@ else
                         @ViewBag.total
                     </td>
                     @*<td>
-                        <a asp-controller="Orders" asp-action="Create">Create Order</a>
-                    </td>*@
+                            <a asp-controller="Orders" asp-action="Create">Create Order</a>
+                        </td>*@
                 </tr>
             </tbody>
         </table>
 
-        <div class="container-fluid w-25 ml-lg-5 text-center mb-2 mt-5">
+        <div class="container-fluid w-50 ml-lg-4 text-center mb-2 mt-5">
             <h1>Complete the form !</h1>
             <hr />
             <form asp-controller="Orders" asp-action="Create" method="get">
                 <div class="mb-3 row">
                     <label asp-for="@Model.FirstName" class="col-form-label col-sm-2"></label>
                     <div class="col-sm-10">
-                        <input asp-for="@Model.FirstName" type="text" class="form-control" />
+                        <input asp-for="@Model.FirstName" type="text" class="form-control inputSize" />
                         <span asp-validation-for="@Model.FirstName" class="text-danger"></span>
                     </div>
                 </div>
-                <label asp-for="@Model.LastName"></label>
-                <div class="form-group">
-                    <input asp-for="@Model.LastName" type="text" class="form-control" />
-                    <span asp-validation-for="@Model.LastName" class="text-danger"></span>
+                <div class="mb-3 row">
+                    <label asp-for="@Model.LastName" class="col-form-label col-sm-2"></label>
+                    <div class="col-sm-10">
+                        <input asp-for="@Model.LastName" type="text" class="form-control inputSize" />
+                        <span asp-validation-for="@Model.LastName" class="text-danger"></span>
+                    </div>
                 </div>
-                <label asp-for="@Model.Email"></label>
-                <div class="form-group">
-                    <input asp-for="@Model.Email" type="email" class="form-control" />
-                    <span asp-validation-for="@Model.Email" class="text-danger"></span>
+                <div class="mb-3 row">
+                    <label asp-for="@Model.Email" class="col-form-label col-sm-2"></label>
+                    <div class="col-sm-10">
+                        <input asp-for="@Model.Email" type="email" class="form-control inputSize" />
+                        <span asp-validation-for="@Model.Email" class="text-danger"></span>
+                    </div>
                 </div>
-                <label asp-for="@Model.Address"></label>
-                <div class="form-group">
-
-                    <input asp-for="@Model.Address" type="text" class="form-control" />
-                    <span asp-validation-for="@Model.Address" class="text-danger"></span>
+                <div class="mb-3 row">
+                    <label asp-for="@Model.Address" class="col-form-label col-sm-2"></label>
+                    <div class="col-sm-10">
+                        <input asp-for="@Model.Address" type="text" class="form-control inputSize" />
+                        <span asp-validation-for="@Model.Address" class="text-danger"></span>
+                    </div>
                 </div>
-                <label asp-for="@Model.PhoneNumber"></label>
-                <div class="form-group">
-
-                    <input asp-for="@Model.PhoneNumber" type="text" class="form-control" />
-                    <span asp-validation-for="@Model.PhoneNumber" class="text-danger"></span>
+                <div class="mb-3 row">
+                    <label asp-for="@Model.PhoneNumber" class="col-form-label col-sm-2"></label>
+                    <div class="col-sm-10">
+                        <input asp-for="@Model.PhoneNumber" type="text" class="form-control inputSize" />
+                        <span asp-validation-for="@Model.PhoneNumber" class="text-danger"></span>
+                    </div>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-danger">Create</button>
+                    <button type="submit" class="btn btn-danger buttonSize">Create</button>
                 </div>
             </form>
         </div>

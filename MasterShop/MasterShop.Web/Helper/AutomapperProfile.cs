@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MasterShop.Models;
 using MasterShop.Web.Models.Categories;
+using MasterShop.Web.Models.Orders;
 using MasterShop.Web.Models.Products;
 using MasterShop.Web.Models.ShoppingCart;
 using System;
@@ -26,6 +27,7 @@ namespace MasterShop.Web.Helper
             CreateMap<Product, DeleteProductViewModel>().ReverseMap();
             CreateMap<EditPostProductViewModel, Product>().ReverseMap();
             CreateMap<Product, ShoppingCartProductViewModel>().ReverseMap();
+            CreateMap<ApplicationUser, CreateUnloggedUserOrderViewModel>().ReverseMap();
         }
     }
 }

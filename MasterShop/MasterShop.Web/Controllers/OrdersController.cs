@@ -19,14 +19,14 @@ namespace MasterShop.Web.Controllers
         private readonly IOrdersService ordersService;
         private readonly IProductsService productsService;
         private readonly IMapper mapper;
-        private readonly MasterShopDbContext db;
+        private readonly IUsersService usersService;
 
-        public OrdersController(IOrdersService ordersService, IProductsService productsService, IMapper mapper, MasterShopDbContext db)
+        public OrdersController(IOrdersService ordersService, IProductsService productsService, IMapper mapper, IUsersService usersService)
         {
             this.ordersService = ordersService;
             this.productsService = productsService;
             this.mapper = mapper;
-            this.db = db;
+            this.usersService = usersService;
         }
 
         [HttpGet]
@@ -37,17 +37,10 @@ namespace MasterShop.Web.Controllers
 
             if (userId == null)
             {
-                //When the user is not logged in he will need to add additional information for the order.                
-                var user = new ApplicationUser()
-                {
-                    FirstName = model.FirstName,
-                    LastName = model.LastName,
-                    Email = model.Email,
-                    Address = model.Address,
-                    PhoneNumber = model.PhoneNumber
-                };
-                this.db.Users.Add(user);
-                this.db.SaveChanges();
+                //When the user is not logged in he will need to add additional information for the order. 
+                var user = this.mapper.Map<ApplicationUser>(model);
+                this.usersService.CreateUser(user);
+                this.usersService.Save();
 
                 this.CreateOrder(cart, user.Id);
             }
