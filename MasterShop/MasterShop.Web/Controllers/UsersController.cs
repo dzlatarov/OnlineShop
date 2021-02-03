@@ -15,5 +15,10 @@ namespace MasterShop.Web.Controllers
         {
             this.usersService = usersService;
         }
+        [HttpGet]
+        public IActionResult Profile()
+        {
+            return this.View();
+        }
     }
 }
