@@ -38,6 +38,7 @@ namespace MasterShop.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             CreateProductViewModel model = new CreateProductViewModel();

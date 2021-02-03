@@ -26,10 +26,8 @@ namespace MasterShop.Web.Helper
                 string uploadDir = Path.Combine(env.WebRootPath, "Images");
                 fileName = Guid.NewGuid().ToString() + "-" + file.FileName;
                 string filePath = Path.Combine(uploadDir, fileName);
-                using(var fileStream = new FileStream(filePath, FileMode.Create))
-                {
-                    file.CopyTo(fileStream);
-                }
+                using var fileStream = new FileStream(filePath, FileMode.Create);
+                file.CopyTo(fileStream);
             }
 
             return fileName;

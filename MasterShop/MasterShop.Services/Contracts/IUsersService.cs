@@ -1,4 +1,5 @@
 ﻿using MasterShop.Models;
+using MasterShop.Services.Models.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace MasterShop.Services.Contracts
         IQueryable<ApplicationUser> GetAllUsers();
         void CreateUser(ApplicationUser user);
         void DeleteUser(ApplicationUser user);
-        void UpdateUser(ApplicationUser user);
+        void UpdateUser(UsersUpdateDto model);
         void Save();
     }
 }

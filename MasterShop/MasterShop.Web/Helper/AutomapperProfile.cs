@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MasterShop.Models;
+using MasterShop.Services.Models.Users;
 using MasterShop.Web.Models.Categories;
 using MasterShop.Web.Models.Orders;
 using MasterShop.Web.Models.Products;
@@ -35,6 +36,7 @@ namespace MasterShop.Web.Helper
             // User
             CreateMap<ApplicationUser, CreateUnloggedUserOrderViewModel>().ReverseMap();
             CreateMap<ApplicationUser, UsersProfileViewModel>().ReverseMap();
+            CreateMap<UsersEditViewModel, UsersUpdateDto>();
         }
     }
 }

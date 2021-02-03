@@ -1,6 +1,8 @@
-﻿using MasterShop.Data;
+﻿using AutoMapper;
+using MasterShop.Data;
 using MasterShop.Models;
 using MasterShop.Services.Contracts;
+using MasterShop.Services.Models.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +13,12 @@ namespace MasterShop.Services
     public class UsersService : IUsersService
     {
         private readonly MasterShopDbContext db;
+        private readonly IMapper mapper;
 
-        public UsersService(MasterShopDbContext db)
+        public UsersService(MasterShopDbContext db, IMapper mapper)
         {
             this.db = db;
+            this.mapper = mapper;
         }
         public void CreateUser(ApplicationUser user)
         {
@@ -41,9 +45,17 @@ namespace MasterShop.Services
             this.db.SaveChanges();
         }
 
-        public void UpdateUser(ApplicationUser user)
+        public void UpdateUser(UsersUpdateDto model)
         {
-            this.db.Users.Update(user);
+            var userFromDb = this.GetUserById(model.Id);
+
+            userFromDb.FirstName = model.Firstname;
+            userFromDb.MiddleName = model.MiddleName;
+            userFromDb.LastName = model.MiddleName;
+            userFromDb.Email = model.Email;
+            userFromDb.Address = model.Address;
+            userFromDb.PhoneNumber = model.PhoneNumber;
+            this.db.Update(userFromDb);
         }
     }
 }

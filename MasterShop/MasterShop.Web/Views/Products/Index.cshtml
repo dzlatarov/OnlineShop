@@ -5,10 +5,14 @@
 }
 
 <h1>Index</h1>
+@if (this.User.Identity.IsAuthenticated)
+{
+    if (this.User.IsInRole("Admin"))
+    {
+        <a asp-action="Create">Create New</a>
+    }
+}
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
