@@ -4,6 +4,7 @@ using MasterShop.Web.Models.Categories;
 using MasterShop.Web.Models.Orders;
 using MasterShop.Web.Models.Products;
 using MasterShop.Web.Models.ShoppingCart;
+using MasterShop.Web.Models.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,11 +16,14 @@ namespace MasterShop.Web.Helper
     {
         public AutomapperProfile()
         {
+            // Category
             CreateMap<Category, CategoryIndexViewModel>();
             CreateMap<Category, DetailsCategoryViewModel>();
             CreateMap<Category, DeleteCategoryViewModel>().ReverseMap();
             CreateMap<Category, EditCategoryViewModel>().ReverseMap();
             CreateMap<CreateCategoryViewModel, Category>();
+
+            // Product
             CreateMap<Product, ProductIndexViewModel>();
             CreateMap<Product, DetailsProductViewModel>()
                 .ForMember(dest => dest.CategoryNames, opt => opt.MapFrom(crc => crc.CategoryProducts.Select(n => n.Category)));
@@ -27,7 +31,10 @@ namespace MasterShop.Web.Helper
             CreateMap<Product, DeleteProductViewModel>().ReverseMap();
             CreateMap<EditPostProductViewModel, Product>().ReverseMap();
             CreateMap<Product, ShoppingCartProductViewModel>().ReverseMap();
+
+            // User
             CreateMap<ApplicationUser, CreateUnloggedUserOrderViewModel>().ReverseMap();
+            CreateMap<ApplicationUser, UsersProfileViewModel>().ReverseMap();
         }
     }
 }
