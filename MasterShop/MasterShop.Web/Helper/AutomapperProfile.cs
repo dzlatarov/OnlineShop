@@ -34,8 +34,7 @@ namespace MasterShop.Web.Helper
             CreateMap<Product, ShoppingCartProductViewModel>().ReverseMap();
 
             // User
-            CreateMap<ApplicationUser, CreateUnloggedUserOrderViewModel>().ReverseMap();
-            CreateMap<ApplicationUser, UsersProfileViewModel>().ReverseMap();
+            CreateMap<ApplicationUser, CreateUnloggedUserOrderViewModel>().ReverseMap();  
             CreateMap<UsersEditViewModel, UsersUpdateDto>();
         }
     }

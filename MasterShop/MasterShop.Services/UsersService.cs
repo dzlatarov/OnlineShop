@@ -55,6 +55,7 @@ namespace MasterShop.Services
             userFromDb.Email = model.Email;
             userFromDb.Address = model.Address;
             userFromDb.PhoneNumber = model.PhoneNumber;
+            userFromDb.ProfileImage = model.ProfileImage;
             this.db.Update(userFromDb);
         }
     }
