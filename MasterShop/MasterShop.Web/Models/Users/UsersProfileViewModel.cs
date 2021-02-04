@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -29,5 +30,7 @@ namespace MasterShop.Web.Models.Users
 
         [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
+
+        public IFormFile ProfileImage { get; set; }
     }
 }

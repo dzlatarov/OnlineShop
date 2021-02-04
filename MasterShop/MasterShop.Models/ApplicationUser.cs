@@ -11,7 +11,7 @@ namespace MasterShop.Models
         {
             base.Id = Guid.NewGuid().ToString();
             this.Orders = new HashSet<Order>();
-        }        
+        }
 
         public string FirstName { get; set; }
 
@@ -20,6 +20,8 @@ namespace MasterShop.Models
         public string LastName { get; set; }
 
         public string Address { get; set; }
+
+        public string ProfileImage { get; set; }
 
         public ICollection<Order> Orders { get; set; }
     }
