@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using MasterShop.Models;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -32,5 +33,7 @@ namespace MasterShop.Web.Models.Users
         public string PhoneNumber { get; set; }
 
         public IFormFile ProfileImage { get; set; }
+
+        public List<Order> Orders { get; set; }
     }
 }

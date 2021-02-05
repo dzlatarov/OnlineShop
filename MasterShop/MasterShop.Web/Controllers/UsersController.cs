@@ -6,6 +6,7 @@ using MasterShop.Web.Helper;
 using MasterShop.Web.Models.Users;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,18 +20,21 @@ namespace MasterShop.Web.Controllers
         private readonly IUsersService usersService;
         private readonly IMapper mapper;
         private readonly IWebHostEnvironment env;
+        private readonly IOrdersService ordersService;
 
-        public UsersController(IUsersService usersService, IMapper mapper, IWebHostEnvironment env)
+        public UsersController(IUsersService usersService, IMapper mapper, IWebHostEnvironment env, IOrdersService ordersService)
         {
             this.usersService = usersService;
             this.mapper = mapper;
             this.env = env;
+            this.ordersService = ordersService;
         }
         [HttpGet]
         public IActionResult Profile(string id)
         {
             var user = this.usersService.GetUserById(id);
-            ViewData["ProfileImage"] = user.ProfileImage;
+            ViewData["ProfileImage"] = user.ProfileImage;            
+            var orders = this.ordersService.GetAllOrders().Include(o => o.OrderProducts).ThenInclude(op => op.Product).Where(o => o.UserId == id).ToList();           
             var userViewModel = new UsersProfileViewModel
             {
                 Id = user.Id,
@@ -40,7 +44,8 @@ namespace MasterShop.Web.Controllers
                 LastName = user.LastName,
                 Email = user.Email,
                 Address = user.Address,
-                PhoneNumber = user.PhoneNumber
+                PhoneNumber = user.PhoneNumber,
+                Orders = orders
             };
             return this.View(userViewModel);
         }

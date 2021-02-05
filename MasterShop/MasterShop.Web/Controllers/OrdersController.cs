@@ -64,6 +64,7 @@ namespace MasterShop.Web.Controllers
             {
                 DateOfCreation = DateTime.Now,
                 UserId = userId
+                //To do replace userId with ApplicationUser
             };
 
             this.ordersService.CreateOrder(order, products);
