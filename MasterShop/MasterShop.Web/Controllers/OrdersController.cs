@@ -60,11 +60,11 @@ namespace MasterShop.Web.Controllers
 
         private void CreateOrder(List<Product> products, string userId)
         {
+            var user = this.usersService.GetUserById(userId);
             var order = new Order
             {
                 DateOfCreation = DateTime.Now,
-                UserId = userId
-                //To do replace userId with ApplicationUser
+                User = user
             };
 
             this.ordersService.CreateOrder(order, products);

@@ -130,22 +130,27 @@
                         </div>
                         <div class="tab-pane fade" id="account-history">
                             <div class="card-body pb-2">
-                                <h6 class="mb-4">Orders</h6>
-                                <table class="form-group">
+                                <table class="form-group text-center">
                                     <tbody>
                                         @foreach (var order in Model.Orders)
                                         {
                                             <tr>
+                                                <th>Product Image</th>
                                                 <th>Name</th>
                                                 <th>Description</th>
                                                 <th>SKU</th>
+                                                <th>Count</th>
+                                                <th>Price</th>
                                             </tr>
                                             foreach (var product in order.OrderProducts.Select(op => op.Product).ToList())
                                             {
                                                 <tr>
-                                                    <td>@product.Name</td>
+                                                    <td class="mr-4"><img src="~/Images/@product.ProductImage" width="100" height="100" alt="" class="d-block ui-w-80"></td>
+                                                    <td class="ml-4">@product.Name</td>
                                                     <td>@product.Description</td>
                                                     <td>@product.SKU</td>
+                                                    <td>@order.Count</td>
+                                                    <td>@product.Price</td>
                                                 </tr>
                                             }
                                         }
