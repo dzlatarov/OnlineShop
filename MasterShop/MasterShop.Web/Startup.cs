@@ -11,14 +11,16 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+
 using MasterShop.Data;
 using MasterShop.Models;
 using MasterShop.Services;
 using MasterShop.Services.Contracts;
 using MasterShop.Web.Helper;
 using MasterShop.Web.Extensions;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+using MasterShop.Infrastructure;
 
 namespace MasterShop.Web
 {
@@ -66,7 +68,7 @@ namespace MasterShop.Web
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler(GlobalConstants.ExeptionHandlerErr);
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
@@ -81,11 +83,11 @@ namespace MasterShop.Web
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    name: GlobalConstants.Name,
+                    pattern: GlobalConstants.Pattern);
                 endpoints.MapRazorPages();
             });
-            
+
         }
     }
 }

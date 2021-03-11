@@ -16,5 +16,10 @@ namespace MasterShop.Infrastructure
         //Coockie paths
         public const string LoginPath = "/Identity/Account/Login";
         public const string LogoutPath = "/Identity/Account/Logout";
+
+        // Exeption handler and map controller route
+        public const string ExeptionHandlerErr = "/Home/Error";
+        public const string Name = "default";
+        public const string Pattern = "{controller=Home}/{action=Index}/{id?}";
     }
 }
