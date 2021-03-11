@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MasterShop.Infrastructure;
 
 namespace MasterShop.Web.Extensions
 {
@@ -14,8 +15,8 @@ namespace MasterShop.Web.Extensions
         {
             services.ConfigureApplicationCookie(options =>
             {
-                options.LoginPath = "/Identity/Account/Login";
-                options.LogoutPath = "/Identity/Account/Logout";
+                options.LoginPath = GlobalConstants.LoginPath;
+                options.LogoutPath = GlobalConstants.LogoutPath;
             });
 
             return services;

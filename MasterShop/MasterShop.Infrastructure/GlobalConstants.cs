@@ -9,5 +9,12 @@ namespace MasterShop.Infrastructure
         // Roles
         public const string AdminRole = "Admin";
         public const string UserRole = "User";
+
+        // Database connection
+        public const string ConnectionName = "DefaultConnection";
+
+        //Coockie paths
+        public const string LoginPath = "/Identity/Account/Login";
+        public const string LogoutPath = "/Identity/Account/Logout";
     }
 }

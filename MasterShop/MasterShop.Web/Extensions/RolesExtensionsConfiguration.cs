@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MasterShop.Infrastructure;
 
 namespace MasterShop.Web.Extensions
 {
@@ -31,13 +32,13 @@ namespace MasterShop.Web.Extensions
 
             var roleManager = serviceScope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-            if (!roleManager.RoleExistsAsync("Admin").Result)
+            if (!roleManager.RoleExistsAsync(GlobalConstants.AdminRole).Result)
             {
-                await roleManager.CreateAsync(new IdentityRole("Admin"));
+                await roleManager.CreateAsync(new IdentityRole(GlobalConstants.AdminRole));
             }
-            if (!roleManager.RoleExistsAsync("User").Result)
+            if (!roleManager.RoleExistsAsync(GlobalConstants.UserRole).Result)
             {
-                await roleManager.CreateAsync(new IdentityRole("User"));
+                await roleManager.CreateAsync(new IdentityRole(GlobalConstants.UserRole));
             }
         }
 
