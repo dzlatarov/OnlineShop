@@ -33,8 +33,8 @@ namespace MasterShop.Web.Controllers
         public IActionResult Profile(string id)
         {
             var user = this.usersService.GetUserById(id);
-            ViewData["ProfileImage"] = user.ProfileImage;            
-            var orders = this.ordersService.GetAllOrders().Include(o => o.OrderProducts).ThenInclude(op => op.Product).Where(o => o.UserId == id).ToList();           
+            ViewData["ProfileImage"] = user.ProfileImage;
+            var orders = this.ordersService.GetAllOrders().Include(o => o.OrderProducts).ThenInclude(op => op.Product).Where(o => o.UserId == id).ToList();
             var userViewModel = new UsersProfileViewModel
             {
                 Id = user.Id,
@@ -53,6 +53,11 @@ namespace MasterShop.Web.Controllers
         [HttpPost]
         public IActionResult Edit(UsersProfileViewModel model)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+
             var fileUpload = new FileUpload(env);
             var imageFile = fileUpload.UploadFile(model.ProfileImage);
             var editedModel = new UsersEditViewModel
