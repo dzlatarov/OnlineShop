@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MasterShop.Infrastructure;
 
 namespace MasterShop.Web.Controllers
 {
@@ -38,7 +39,7 @@ namespace MasterShop.Web.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = GlobalConstants.AdminRole)]
         public IActionResult Create()
         {
             CreateProductViewModel model = new CreateProductViewModel();
@@ -72,7 +73,7 @@ namespace MasterShop.Web.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = GlobalConstants.AdminRole)]
         public IActionResult Edit(string id)
         {
             var product = this.productsService.GetProductById(id);

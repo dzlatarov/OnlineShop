@@ -39,6 +39,11 @@ namespace MasterShop.Web.Controllers
         [HttpPost]
         public IActionResult Create(CreateCategoryViewModel model)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+
             var categoryFromModel = this.mapper.Map<Category>(model);
             this.categoriesService.Insert(categoryFromModel);
             this.categoriesService.Save();
@@ -57,6 +62,11 @@ namespace MasterShop.Web.Controllers
         [HttpPost]
         public IActionResult Edit(EditCategoryViewModel model)
         {
+            if(!this.ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+
             var categoryFromModel = this.mapper.Map<Category>(model);
             this.categoriesService.Update(categoryFromModel);
             this.categoriesService.Save();
