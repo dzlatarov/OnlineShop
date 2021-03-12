@@ -54,6 +54,11 @@ namespace MasterShop.Web.Controllers
         [HttpPost]
         public IActionResult Create(CreateProductViewModel model)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View();
+            }
+
             var fileUpload = new FileUpload(env);
             var selectedCategories = model.Categories.Where(x => x.Selected).Select(x => x.Value).ToList();
             var imageFile = fileUpload.UploadFile(model.ProductImage);
@@ -91,6 +96,12 @@ namespace MasterShop.Web.Controllers
         [HttpPost]
         public IActionResult Edit(EditProductViewModel model)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+
+
             var fileUpload = new FileUpload(env);
             var imageFile = fileUpload.UploadFile(model.ProductImage);
             var editedProduct = new EditPostProductViewModel
